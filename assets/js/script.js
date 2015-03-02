@@ -6,50 +6,54 @@ $( document ).ready(function() {
 	var day = (hour * 3600 + minute * 60 + second)/86400
 	var precent = second / 60;
 	var lat = 35.888793;
-	var long = -79.063376;
-	var now = new Date();
+	var long = -99.063376;
+	var sunHorizontal = sunLocation("sunH", lat, long)
+	var sunVirtual = sunLocation("sunV", lat, long)
 
-	console.log("now " + now);
-	$('.clock').html(time(now));
+	$('.clock').html(time(currentDate));
 	$('.filter').animate({opacity: 0 }, 1000);
 	$('.clock').animate({opacity: 1 }, 1000);
 
-console.log("sunLocation(sunV) " + sunLocation("sunV", lat, long))
 	$('Body').css("background-image",
 			"-webkit-radial-gradient(" +
-				sunLocation("sunH", lat, long) + " " +
-				sunLocation("sunV", lat, long) +
+				sunHorizontal + "% " +
+				(100 - sunVirtual) + "%" +
 				", circle contain," +
 				"yellow, " +
-				color(90) + " 10px, " +
-				color(200) + " 48px," +
-				color(1000) + " 256%," +
-				color(1700) + " 512px");
+				color(80) + " 20px, " +
+				color(100) + " 48px," +
+				color(200) + " 256px," +
+				color(800) + " 512px)");
 
 	window.setInterval(function(){
 		var currentDate = new Date();
 		var hour = currentDate.getHours();
 		var minute = currentDate.getMinutes();
 		var second = currentDate.getSeconds();
+		var sunHorizontal = sunLocation("sunH", lat, long)
+		var sunVirtual = sunLocation("sunV", lat, long)
+
 
 		var daySeconds = (hour * 3600 + minute * 60 + second)/86400
 		var sunHeight = daySplit(daySeconds);
 		var tint = 1 - sunHeight;
 		// var light = dayLight(day)
-		// console.log("color(2000) " + color(2000));
+		// console.log("color(1800) " + color(1800));
 
 		$('Body').css("background-image",
 				"-webkit-radial-gradient(" +
-				sunLocation("sunH", lat, long) + " " +
-				sunLocation("sunV", lat, long) +
+					sunHorizontal + "% " +
+					(100 - sunVirtual) + "%" +
 					", circle contain," +
 					"yellow, " +
-					color(90) + " 10px, " +
-					color(200) + " 48px," +
-					color(1000) + " 256%," +
-					color(1700) + " 512px");
-		// $('.filter').css("opacity", tint);
-		$('.clock').html(time(now));
+					color(80) + " 20px, " +
+					color(100) + " 48px," +
+					color(200) + " 256px," +
+					color(800) + " 512px)");
+		$('.clock').html(time(currentDate));
+		console.log("sunVirtual " + sunVirtual);
+		$('.clock').css("text-shadow", "3px 3px 0 #000000");
+
 	}, 1000);
 });
 

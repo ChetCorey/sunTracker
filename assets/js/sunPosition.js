@@ -12,8 +12,8 @@ function sunLocation(direction, lat, long) {
 	var sunrisePos = SunCalc.getPosition(times.sunrise, lat, long);
 	var sunriseAzimuth = sunrisePos.azimuth * 180 / Math.PI;
 
-	var sunH = preTimeSinceSunrise + "%";
-	var sunV = sunVertical(preTimeSinceSunrise) + "%";
+	var sunH = preTimeSinceSunrise;
+	var sunV = sunVertical(preTimeSinceSunrise);
 	if (direction == "sunH") { return sunH};
 	if (direction == "sunV") { return sunV};
 }
@@ -21,6 +21,5 @@ function sunLocation(direction, lat, long) {
 function sunVertical(sunHorizontal) {
   var precentTop = 1.2;
   var sunVar = Math.sqrt(1 - Math.pow(((2 * sunHorizontal/100) - 1) * precentTop, 2));
-  sunVTopDown = (100 - (sunVar * 100));
-  return sunVTopDown;
+  return (sunVar * 100);
 }
