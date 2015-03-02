@@ -1,9 +1,9 @@
 function color(point) {
+  point = point / 1000;
 	console.log("point " + point);
 	var temp = 1000 + (9400 * point);
 
 	var temp = temp / 100;
-	console.log(temp);
 	// Calculate Red:
 	if (temp <= 66) {
 		var red = 255

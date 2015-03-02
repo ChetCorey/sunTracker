@@ -22,25 +22,30 @@ $( document ).ready(function() {
 		var daySeconds = (hour * 3600 + minute * 60 + second)/86400
 		var sunHeight = daySplit(daySeconds);
 		var tint = 1 - sunHeight;
-		var light = dayLight(day)
+		// var light = dayLight(day)
 
-		var lat = 35.88;
-		var long = -79;
-		var times = SunCalc.getTimes(new Date(), lat, long);
-		var sunriseStr = times.sunrise.getHours() + ':' + times.sunrise.getMinutes();
-		console.log(sunriseStr);
+		$('Body').css("background-image",  "-webkit-radial-gradient(" + sunLocation("sunHorizontal") + " " + sunLocation("sunVertical") + ", circle contain, yellow 10px, " + color(600) + " 20px, " + color(1000) + " 100px");
+		console.log("color(800) " + color(800));
 
-
-		$('Body').css("background-image",  "-webkit-radial-gradient(" + sunHorizontal + " " + sunVertical + ", circle contain, white 1px, yellow 10px, " + color(sunHeight) + " 30px");
-		$('.filter').css("opacity", tint);
+		// $('.filter').css("opacity", tint);
 		$('.clock').html(time());
 	}, 1000);
 });
 
-function sunLocation(date) {
+function sunLocation(direction) {
+	var lat = 35.88;
+	var long = 139;
+	var times = SunCalc.getTimes(new Date(), lat, long);
+	var sunriseStr = times.sunrise.getHours() + ':' + times.sunrise.getMinutes();
+	var dayLtSec = times.sunset.getTime() - times.sunrise.getTime()
+	var precentLt = dayLtSec/86400000
+	var sunrisePos = SunCalc.getPosition(times.sunrise, lat, long);
+	var sunriseAzimuth = sunrisePos.azimuth * 180 / Math.PI;
 
-	var sunHorizontal = 50%;
-	var sunVertical = 1%;
+	var sunHorizontal = "20%";
+	var sunVertical = "20%";
+	if (direction == "sunHorizontal") { return sunHorizontal};
+	if (direction == "sunVertical") { return sunVertical};
 }
 
 // function toDegrees(angle) {
