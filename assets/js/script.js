@@ -1,43 +1,46 @@
 $( document ).ready(function() {
 	var currentDate = new Date();
 	var lat = 35.9;
-	var long = (-146);
+	var long = -236;
 	var sunHorizontal = sunLocation("sunH", lat, long)
 	var sunVirtual = sunLocation("sunV", lat, long)
+	var shadowRight = (-16 * shadow(sunHorizontal).toFixed(3));
+	var shadowBottom = (16 * shadow(sunVirtual).toFixed(3));
+	var clockTop = $('.clock').position().top;
 
 	$('.clock').html(time(currentDate));
 	$('.filter').animate({opacity: 0 }, 1000);
-	$('.clock').animate({opacity: 1 }, 1000);
+	$('.clock').animate({
+		opacity: 1,
+		top: ((clockTop - shadowBottom) + "px"),
+		textShadow: ("#000000 " + (shadowRight) + "px " + (shadowBottom) + "px 4px"),
+		}, 1000);
+	// debugger
 	$('Body').css("background-image",
 			"-webkit-radial-gradient(" +
 				sunHorizontal + "% " +
 				(100 - sunVirtual) + "%" +
-				", circle contain," +
-				"yellow, " +
-				color(80) + " 20px, " +
-				color(100) + " 48px," +
-				color(400) + " 256px," +
-				color(1000) + " 512px)");
+				", circle contain, yellow, " +
+				color(100) + " 12px," +
+				color(900) + " 512px)");
 
 	window.setInterval(function(){
 		var currentDate = new Date();
 		var hour = currentDate.getHours();
 		var minute = currentDate.getMinutes();
 		var second = currentDate.getSeconds();
-		var sunHorizontal = sunLocation("sunH", lat, long)
-			// sunHorizontal = 90;
-////////////////////////////////////////////////////////////////////////////////
-		var sunVirtual = sunLocation("sunV", lat, long)
-		var daySeconds = (hour * 3600 + minute * 60 + second)/86400
+		var daySeconds = (hour * 3600 + minute * 60 + second)/86400;
 		var sunHeight = daySplit(daySeconds);
-		var tint = 1 - sunHeight;
-		var shadowRight = (-20 * shadow(sunHorizontal).toFixed(3));
-		console.log("shadow hello Right " + shadowRight);
-		var shadowBottom = (20 * shadow(sunVirtual));
-		console.log("shadowBottom " + shadowBottom);
+		var shadowRight = (-16 * shadow(sunHorizontal).toFixed(3));
+		var shadowBottom = (16 * shadow(sunVirtual).toFixed(3));
 
-		// var light = dayLight(day)
-		// console.log("sunHorizontal " + sunHorizontal);
+		$('.clock').html(time(currentDate));
+		$('.clock').css("text-shadow", (shadowRight) + "px " + (shadowBottom) + "px 4px #000000");
+	}, 1000);
+
+	window.setInterval(function(){
+		var sunHorizontal = sunLocation("sunH", lat, long)
+		var sunVirtual = sunLocation("sunV", lat, long)
 
 		$('Body').css("background-image",
 				"-webkit-radial-gradient(" +
@@ -46,11 +49,8 @@ $( document ).ready(function() {
 					", circle contain, yellow, " +
 					color(100) + " 12px," +
 					color(900) + " 512px)");
-		$('.clock').html(time(currentDate));
 
-		$('.clock').css("text-shadow",
-				(shadowRight) + "px " + (shadowBottom) + "px 4px #000000");
-	}, 1000);
+	}, 60000);
 });
 
 function shadow(sunDirection) {

@@ -13,13 +13,15 @@ function sunLocation(direction, lat, long) {
 	var sunriseAzimuth = sunrisePos.azimuth * 180 / Math.PI;
 
 	var sunH = preTimeSinceSunrise;
+  console.log("preTimeSinceSunrise " + preTimeSinceSunrise);
 	var sunV = sunVertical(preTimeSinceSunrise);
 	if (direction == "sunH") { return sunH};
 	if (direction == "sunV") { return sunV};
 }
 
 function sunVertical(sunHorizontal) {
-  var precentTop = 1.2;
+  if (sunHorizontal < 0) {var sunHorizontal = -sunHorizontal};
+  var precentTop = 1;
   var sunVar = Math.sqrt(1 - Math.pow(((2 * sunHorizontal/100) - 1) * precentTop, 2));
   return (sunVar * 100);
 }

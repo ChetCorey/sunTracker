@@ -9,6 +9,7 @@ body {
   height: 100vh;
   width: 100vw;
   margin: 0;
+  background-image: -webkit-radial-gradient(1% 99%, circle contain, yellow, rgb(178, 203, 255) 12px, rgb(95, 135, 255) 512px);
 }
 
 .filter {
@@ -45,7 +46,7 @@ body {
 	height: 100px;
 	color: white;
   position: fixed;
-	opacity: .5;
+	opacity: 0;
 	font-size: 800%;
   margin: 0 auto;
   padding: 80px 20px;
