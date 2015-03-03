@@ -1,7 +1,7 @@
 $( document ).ready(function() {
 	var currentDate = new Date();
 	var lat = 35.9;
-	var long = (-180);
+	var long = (-146);
 	var sunHorizontal = sunLocation("sunH", lat, long)
 	var sunVirtual = sunLocation("sunV", lat, long)
 
@@ -25,45 +25,44 @@ $( document ).ready(function() {
 		var minute = currentDate.getMinutes();
 		var second = currentDate.getSeconds();
 		var sunHorizontal = sunLocation("sunH", lat, long)
-			sunHorizontal = 90;
+			// sunHorizontal = 90;
 ////////////////////////////////////////////////////////////////////////////////
 		var sunVirtual = sunLocation("sunV", lat, long)
 		var daySeconds = (hour * 3600 + minute * 60 + second)/86400
 		var sunHeight = daySplit(daySeconds);
 		var tint = 1 - sunHeight;
-		var shadowRight = (16 * shadowH(sunHorizontal).toFixed(3));
-		console.log("sunHorizontal " + sunHorizontal);
+		var shadowRight = (-20 * shadow(sunHorizontal).toFixed(3));
 		console.log("shadow hello Right " + shadowRight);
-		var shadowBottom = 2;
+		var shadowBottom = (20 * shadow(sunVirtual));
+		console.log("shadowBottom " + shadowBottom);
+
 		// var light = dayLight(day)
-		console.log("sunHorizontal " + sunHorizontal);
+		// console.log("sunHorizontal " + sunHorizontal);
 
 		$('Body').css("background-image",
 				"-webkit-radial-gradient(" +
 					sunHorizontal + "% " +
 					(100 - sunVirtual) + "%" +
-					", circle contain," +
-					"yellow, " +
-					color(80) + " 20px, " +
-					color(100) + " 48px," +
-					color(400) + " 256px," +
-					color(1000) + " 512px)");
+					", circle contain, yellow, " +
+					color(100) + " 12px," +
+					color(900) + " 512px)");
 		$('.clock').html(time(currentDate));
 
-		$('.clock').css("text-shadow", " " + (-shadowRight) + "px " + " " + (10 * shadowBottom) + "px 0 #000000");
+		$('.clock').css("text-shadow",
+				(shadowRight) + "px " + (shadowBottom) + "px 4px #000000");
 	}, 1000);
 });
 
-function shadowH(sunHorizontal) {
-	if (sunHorizontal >= 50) {
-		var shadowRight = (2 * (sunHorizontal/100) - 1);
-		console.log("shadowRight >>>> " + shadowRight);
-		return shadowRight;
+function shadow(sunDirection) {
+	if (sunDirection >= 50) {
+		var shadowDirection = (2 * (sunDirection/100) - 1);
+		console.log("+ shadowDirection >>>> " + shadowDirection);
+		return shadowDirection;
 	}
-	if (sunHorizontal < 50) {
-		var shadowRight = (-2 * (sunHorizontal/100));
-		console.log("shadowleft >>>> " + -shadowRight);
-		return shadowRight;
+	if (sunDirection < 50) {
+		var shadowDirection = (2 * (sunDirection/100) - 1);
+		console.log("- shadowleft >>>> " + shadowDirection);
+		return shadowDirection;
 	}
 }
 

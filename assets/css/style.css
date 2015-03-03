@@ -41,7 +41,7 @@ body {
 
 .clock {
   width: 100%;
-  top: calc(40% - 280px);
+  top: calc(50% - 280px);
 	height: 100px;
 	color: white;
   position: fixed;
