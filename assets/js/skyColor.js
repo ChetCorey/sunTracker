@@ -18,7 +18,6 @@ function color(point) {
     if (dimRed < 0) {dimRed = 0};
 		if (dimRed > 255) {dimRed = 255};
     if (temp > 2000) {dimRed = 0};
-
     // console.log("dimRed " + dimRed + "; red " + red);
 	}
 
@@ -39,7 +38,6 @@ function color(point) {
     if (dimGreen < 0) { dimGreen = 0};
 		if (dimGreen > 255) { dimGreen = 255};
     if (temp > 2000) {dimGreen = 0};
-
     // console.log("dimGreen " + dimGreen + "; green " + green);
 	}
 
@@ -56,7 +54,6 @@ function color(point) {
     if (dimBlue < 0) {dimBlue = 0};
 		if (dimBlue > 255) {dimBlue = 255};
     if (temp > 2200) {dimBlue = 0};
-
     // console.log("dimBlue " + dimBlue + "; blue " + blue);
 	}
 
