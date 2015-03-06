@@ -4,21 +4,24 @@
 	<meta charset="utf-8"/>
 	<title>Sun</title>
 	<link href="assets/css/style.css" rel="stylesheet" />
-</head>
-
 <body>
+
+	<input id="address" type="textbox" placeholder="Chapel Hill, NC" onkeypress="this.style.width = ((this.value.length + 1) * 13 + 40) + 'px';" >
+	<div id="map-canvas"></div>
+	<div class="loadingScreen"></div>
 	<div class="filter"></div>
 	<div class="clock"></div>
 	<footer class="forest"></footer>
 
 	<!-- JavaScript Includes -->
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-	<script src="	assets/js/jquery-1.6.1.min.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
+	<script src="assets/js/jquery-1.6.1.min.js"></script>
 	<script src="assets/js/jquery.animate-textshadow.min.js"></script>
 	<script src="assets/js/skyColor.js"></script>
-	<script src="assets/js/scrap.js"></script>
+	<script src="assets/js/geoLocator.js"></script>
 	<script src="assets/js/clock.js"></script>
-	<script src="assets/js/sunPosition.js"></script>
+	<script src="assets/js/sunLocation.js"></script>
 	<script src="assets/js/sunCalc.js"></script>
 	<script src="assets/js/script.js"></script>
 </body>

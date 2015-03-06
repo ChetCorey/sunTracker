@@ -1,7 +1,7 @@
 // this is a sky color generator
 // the tempature range is from 0 to 2200
 
-function color(point, alpha) {
+function color(point) {
 	var temp = point;
 
 	// Calculate Red:
@@ -53,6 +53,6 @@ function color(point, alpha) {
     if (temp > 2200) {dimBlue = 0};
 	}
 
-var colorTemp = "rgba(" + dimRed + "," + dimGreen + "," + dimBlue + "," + alpha + ")";
+var colorTemp = "rgb(" + dimRed + "," + dimGreen + "," + dimBlue + ")";
 return colorTemp;
 }

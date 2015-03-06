@@ -1,84 +1,58 @@
-var lat = 35.913200;
-var long = -79.055845;
-var city = "Chapel Hill";
-var state = "NC";
-var address = document.getElementById('address').value;
-
 $( document ).ready(function() {
-	$("#address").focus();
 	var currentDate = new Date();
+	var map;
+	var lat = 35.913200;
+	var long = -79.055845;
+	var address = document.getElementById('address').value;
+	var geocoder = new google.maps.Geocoder();
+
 	var clockTop = $('.clock').position().top;
 	var clockWidth = $('.clock').width();
-	var sunHorizontal = sunLocation("sunH", lat, long);
-	var sunVirtual = sunLocation("sunV", lat, long);
+	var sunHorizontal = sunLocation("sunH", lat, long)
+	var sunVirtual = sunLocation("sunV", lat, long)
 	var shadowRight = (-16 * shadow(sunHorizontal).toFixed(3));
 	var shadowBottom = (16 * shadow(sunVirtual).toFixed(3));
-	LoadMe();
 
 	$('.clock').html(time(currentDate));
-	$('.loadingScreen').animate({opacity: 0 }, 1000);
+	$('.filter').animate({opacity: 0 }, 1000);
 	$('.clock').animate({
 		opacity: 1,
 		top: ((clockTop - shadowBottom) + "px"),
 		textShadow: ("#000000 " + (shadowRight) + "px " + (shadowBottom) + "px 4px"),
 		}, 1000);
-
-	$('.filter').css({"background":
-			"-webkit-linear-gradient(bottom, " +
-			// sunRiseSet(sunVirtual) +
-			"rgba(178, 203, 255, 0.4), rgba(0,21,48,0.4))"
-		});
 	$('Body').css("background-image",
 		"-webkit-radial-gradient(" +
 			sunHorizontal + "% " +
 			(100 - sunVirtual) + "%" +
 			", circle contain, yellow, " +
-			color(100, 1) + " 30px," +
-			color(1200, 1) + " 512px);");
-	onceASecond();
-	onceAMinute();
-});
+			color(100) + " 30px," +
+			color(1200) + " 512px)");
 
-function onceASecond() {
-	window.setInterval(function(){
-		$('.clock').html(time(new Date()));
-	}, 1000);
-};
-
-function sunRiseSet(sunVirtual) {
-	debugger
-}
-
-
-
-
-
-
-function 	onceAMinute() {
 	window.setInterval(function(){
 		var currentDate = new Date();
-		var second = currentDate.getSeconds();
-		var minute = currentDate.getMinutes();
+		// var lat = 35.9;
+		// var long = -236;
 		var hour = currentDate.getHours();
+		var minute = currentDate.getMinutes();
+		var second = currentDate.getSeconds();
 		var daySeconds = (hour * 3600 + minute * 60 + second)/86400;
 		var sunHeight = daySplit(daySeconds);
 		var sunHorizontal = sunLocation("sunH", lat, long)
 		var sunVirtual = sunLocation("sunV", lat, long)
-		console.log("sunVirtual :" + sunVirtual);
-		console.log("sunHorizontal :" + sunHorizontal);
-
 		var shadowRight = (-16 * shadow(sunHorizontal).toFixed(3));
 		var shadowBottom = (16 * shadow(sunVirtual).toFixed(3));
+
+		$('.clock').html(time(currentDate));
 		$('.clock').css("text-shadow", (shadowRight) + "px " + (shadowBottom) + "px 4px #000000");
 		$('Body').css("background-image",
 				"-webkit-radial-gradient(" +
 					sunHorizontal + "% " +
 					(100 - sunVirtual) + "%" +
 					", circle contain, yellow, " +
-					color(100,1) + " 16px," +
-					color(900,1) + " 512px)");
-	}, 2000);
-};
+					color(100) + " 16px," +
+					color(900) + " 512px)");
+	}, 1000);
+});
 
 function shadow(sunDirection) {
 	if (sunDirection >= 50) {
@@ -109,20 +83,4 @@ function spacing(unit) {
 	else {
 		return unit
 	}
-}
-
-function LoadMe()
-{
-   function test_KeyPressed(e)
-    {
-       alert(e.keycode);
-    }
-    $('#address').bind('keypress', function(e){
-       var code = e.keyCode ? e.keyCode : e.which;
-       if(code == 13) // Enter key is pressed
-       {
-          console.log("loading address")
-					codeAddress()
-       }
-    });
 }
