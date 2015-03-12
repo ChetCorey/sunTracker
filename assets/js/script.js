@@ -64,8 +64,8 @@ function 	onceAMinute() {
 		var sunHeight = daySplit(daySeconds);
 		var sunHorizontal = sunLocation("sunH", lat, long)
 		var sunVirtual = sunLocation("sunV", lat, long)
-		console.log("sunVirtual :" + sunVirtual);
-		console.log("sunHorizontal :" + sunHorizontal);
+		console.log("sunVirtual: " + sunVirtual);
+		console.log("sunHorizontal: " + sunHorizontal);
 
 		var shadowRight = (-16 * shadow(sunHorizontal).toFixed(3));
 		var shadowBottom = (16 * shadow(sunVirtual).toFixed(3));
